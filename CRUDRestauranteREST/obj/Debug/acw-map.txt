@@ -1,0 +1,4 @@
+CRUDRestauranteREST.MainActivity, CRUDRestauranteREST;md5124c2e50c2131f0f5f43ff59cfb2de38.MainActivity
+CRUDRestauranteREST.MainActivity, CRUDRestauranteREST, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5124c2e50c2131f0f5f43ff59cfb2de38.MainActivity
+CRUDRestauranteREST.MainActivity;md5124c2e50c2131f0f5f43ff59cfb2de38.MainActivity
+crudrestauranterest.MainActivity;md5124c2e50c2131f0f5f43ff59cfb2de38.MainActivity

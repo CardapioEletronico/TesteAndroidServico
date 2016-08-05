@@ -12,12 +12,16 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 using System.Json;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace CRUDRestauranteREST
 {
     [Activity(Label = "CRUDRestauranteREST", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        List<Models.Restaurante> lista;
+        ArrayAdapter<Models.Restaurante> adapter;
         private JsonValue aeho;
         private async Task<JsonValue> Get()
         {
@@ -38,15 +42,12 @@ namespace CRUDRestauranteREST
 
                     // Return the JSON document:
                     return jsonDoc;
+                    
+                    
+
                 }
             }
         }
-
-
-
-
-        //https://www.youtube.com/watch?v=zZHLHrkvUt0
-
         protected async override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -57,11 +58,22 @@ namespace CRUDRestauranteREST
 
             get.Click += delegate { get.Text = string.Format("{0} clicks!"); };
 
-            ListView select = FindViewById<ListView>(Resource.Id.listRestaurant);
+            ListView select = FindViewById<ListView>(Resource.Id.lulu);
+
             aeho = await Get();
 
-            ArrayAdapter <string> asa = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, aeho.ToString());
-            select.Adapter = new Adapter(this, Android.Resource.Layout.SimpleListItem1, )
+            List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
+
+            ListView mozovo = FindViewById<ListView>(Resource.Id.lulu);
+
+            ArrayAdapter adapter = new ArrayAdapter<Models.Restaurante>(this, Android.Resource.Layout.SimpleListItem1, list);
+            mozovo.Adapter = adapter;
+
+            /*string content = aeho.ToString(); 
+            mozovo.Text = content;*/
+
+            //ArrayAdapter <string> asa = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, new int[] { Android.R},aeho.ToString());
+           
         }
     }
 }

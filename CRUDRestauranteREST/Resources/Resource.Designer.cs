@@ -67,7 +67,7 @@ namespace CRUDRestauranteREST
 			public const int linearLayout1 = 2131034112;
 			
 			// aapt resource value: 0x7f050002
-			public const int listRestaurant = 2131034114;
+			public const int lulu = 2131034114;
 			
 			static Id()
 			{
