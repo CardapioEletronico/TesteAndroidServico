@@ -21,7 +21,9 @@ namespace CRUDRestauranteREST
     public class MainActivity : Activity
     {
         List<Models.Restaurante> lista;
-        ArrayAdapter<Models.Restaurante> adapter;
+
+        //ArrayAdapter<Models.Restaurante> adapter;
+        ArrayAdapter<string> adapter;
         private JsonValue aeho;
         private async Task<JsonValue> Get()
         {
@@ -41,10 +43,7 @@ namespace CRUDRestauranteREST
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
 
                     // Return the JSON document:
-                    return jsonDoc;
-                    
-                    
-
+                    return jsonDoc.ToString();
                 }
             }
         }
@@ -53,27 +52,23 @@ namespace CRUDRestauranteREST
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Main);
-
             Button get = FindViewById<Button>(Resource.Id.button1);
 
             get.Click += delegate { get.Text = string.Format("{0} clicks!"); };
 
-            ListView select = FindViewById<ListView>(Resource.Id.lulu);
+            ListView select = FindViewById<ListView>(Resource.Id.ListRestaurantes);
 
             aeho = await Get();
 
             List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
 
-            ListView mozovo = FindViewById<ListView>(Resource.Id.lulu);
+            ListView mozovo = FindViewById<ListView>(Resource.Id.ListRestaurantes);
 
-            ArrayAdapter adapter = new ArrayAdapter<Models.Restaurante>(this, Android.Resource.Layout.SimpleListItem1, list);
-            mozovo.Adapter = adapter;
+            mozovo.Adapter = new ArrayAdapter<Models.Restaurante>(this, Android.Resource.Layout.SimpleListItem1, list);
+            //mozovo.Adapter = adapter;
 
-            /*string content = aeho.ToString(); 
-            mozovo.Text = content;*/
+            //http://stacktips.com/tutorials/xamarin/listview-example-in-xamarin-android
 
-            //ArrayAdapter <string> asa = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, new int[] { Android.R},aeho.ToString());
-           
         }
     }
 }

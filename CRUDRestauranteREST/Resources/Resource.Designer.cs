@@ -28,6 +28,22 @@ namespace CRUDRestauranteREST
 		{
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int listaRestaurantes = 2131034112;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -60,14 +76,14 @@ namespace CRUDRestauranteREST
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int button1 = 2131034113;
+			// aapt resource value: 0x7f060002
+			public const int ListRestaurantes = 2131099650;
 			
-			// aapt resource value: 0x7f050000
-			public const int linearLayout1 = 2131034112;
+			// aapt resource value: 0x7f060001
+			public const int button1 = 2131099649;
 			
-			// aapt resource value: 0x7f050002
-			public const int lulu = 2131034114;
+			// aapt resource value: 0x7f060000
+			public const int linearLayout1 = 2131099648;
 			
 			static Id()
 			{
@@ -83,7 +99,10 @@ namespace CRUDRestauranteREST
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int ListItem = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int Main = 2130903041;
 			
 			static Layout()
 			{

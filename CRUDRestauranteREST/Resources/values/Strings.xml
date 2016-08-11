@@ -2,5 +2,9 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">CRUDRestauranteREST</string>
+    <string-array name="listaRestaurantes">
+      <item>Id</item>
+      <item>Descricao</item>
+    </string-array>
     
 </resources>
