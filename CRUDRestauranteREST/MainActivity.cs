@@ -18,13 +18,10 @@ using System.Collections.Generic;
 namespace CRUDRestauranteREST
 {
     [Activity(Label = "CRUDRestauranteREST", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    public class MainActivity : ListActivity
     {
-        List<Models.Restaurante> lista;
-
-        //ArrayAdapter<Models.Restaurante> adapter;
-        ArrayAdapter<string> adapter;
         private JsonValue aeho;
+
         private async Task<JsonValue> Get()
         {
             // Create an HTTP web request using the URL:
@@ -47,29 +44,48 @@ namespace CRUDRestauranteREST
                 }
             }
         }
-        protected async override void OnCreate(Bundle bundle)
+
+        private async void Post()
+        {
+            WebClient client = new WebClient();
+            Uri uri = new Uri("http://10.21.0.137/20131011110061/api/restaurante");
+            
+
+        }
+
+        protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            Teste();
+            //this.SetContentView(Resource.Layout.ListItem);
 
-            SetContentView(Resource.Layout.Main);
-            Button get = FindViewById<Button>(Resource.Id.button1);
+            //Button button = FindViewById<Button>(Resource.Id.btnSelect);
+            //button.Click += delegate { Teste(); };
+            
+        }
 
-            get.Click += delegate { get.Text = string.Format("{0} clicks!"); };
-
-            ListView select = FindViewById<ListView>(Resource.Id.ListRestaurantes);
-
+        public async void Teste()
+        {
             aeho = await Get();
 
             List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
+            IList<IDictionary<string, object>> dados = new List<IDictionary<string, object>>();
+            foreach (Models.Restaurante r in list)
+            {
+                IDictionary<string, object> dado = new JavaDictionary<string, object>();
+                dado.Add("Id", r.Id.ToString());
+                dado.Add("Descricao", r.Descricao);
+                dados.Add(dado);
+            }
 
-            ListView mozovo = FindViewById<ListView>(Resource.Id.ListRestaurantes);
-
-            mozovo.Adapter = new ArrayAdapter<Models.Restaurante>(this, Android.Resource.Layout.SimpleListItem1, list);
-            //mozovo.Adapter = adapter;
-
-            //http://stacktips.com/tutorials/xamarin/listview-example-in-xamarin-android
-
+            string[] from = new String[] { "Id", "Descricao" };
+            int[] to = new int[] {Resource.Id.idRest, Resource.Id.descRest };
+            int layout = Resource.Layout.ListItem;
+            SimpleAdapter adapter = new SimpleAdapter(this, dados, layout, from, to);
+            this.ListAdapter = adapter;
         }
     }
 }
+
+//http://stacktips.com/tutorials/xamarin/listview-example-in-xamarin-android
 
