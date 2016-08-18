@@ -39,12 +39,36 @@ namespace CRUDRestauranteREST
                     // Use this stream to build a JSON document object:
                     JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
                     Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-
                     // Return the JSON document:
                     return jsonDoc.ToString();
                 }
             }
         }
+
+        /*private async Task<string> Get()
+        {
+            // Create an HTTP web request using the URL:
+            // Uri uri = new Uri("http://10.21.0.137/20131011110061/api/restaurante");
+            Uri uri = new Uri("http://localhost:3906/api/restaurante");
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+
+            request.Method = "GET";
+
+            // Send the request to the server and wait for the response:
+            using (WebResponse response = await request.GetResponseAsync())
+            {
+                // Get a stream representation of the HTTP web response:
+                using (Stream stream = response.GetResponseStream())
+                {
+                    // Use this stream to build a JSON document object:
+                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+
+                    // Return the JSON document:
+                    return jsonDoc.ToString();
+                }
+            }
+        }*/
 
 
         /*private void btnPost_Click(object sender, RoutedEventArgs e)
@@ -113,7 +137,7 @@ namespace CRUDRestauranteREST
         {
             base.OnCreate(bundle);
             Teste();
-            //this.SetContentView(Resource.Layout.ListItem);
+            SetContentView(Resource.Layout.Main);
 
             //Button button = FindViewById<Button>(Resource.Id.btnSelect);
             //button.Click += delegate { Teste(); };
@@ -136,44 +160,36 @@ namespace CRUDRestauranteREST
 
             string[] from = new String[] { "Id", "Descricao" };
             int[] to = new int[] {Resource.Id.idRest, Resource.Id.descRest };
-            int layout = Resource.Layout.ListItem;
-            SimpleAdapter adapter = new SimpleAdapter(this, dados, layout, from, to);
-            this.ListAdapter = adapter;
-        }
+            //int layout = Resource.Layout.ListItem;
+            int layout = Resource.Layout.Main;
+            //SimpleAdapter adapter = new SimpleAdapter(this, dados, layout, from, to);
+            //this.ListAdapter = adapter;
 
+            //ListView lv = FindViewById<ListView>(Resource.Id.lista);
+            //lv.Adapter = adapter;
+
+            
+            EditText txtid = FindViewById<EditText>(Resource.Id.txtId);
+            EditText txtdesc = FindViewById<EditText>(Resource.Id.txtDescricao);
+            // ArrayList for data row
+            // SimpleAdapter mapping static data to views in xml file
+            SimpleAdapter adapter = new SimpleAdapter(this, dados, Resource.Layout.ListItem, from, to);
+
+            //this.ListAdapter = adapter;
+            ListView.Adapter = adapter;
+
+
+            //http://www.worldbestlearningcenter.com/tips/Android-ListView-SimpleAdapter.htm
+        }
 
         public void TesteGet()
         {
-            // JsonValue aeho = await Get();
             string aeho = Get2();
             List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
-            dataGrid.ItemsSource = list;
+            //dataGrid.ItemsSource = list;
         }
 
-        private async Task<string> Get()
-        {
-            // Create an HTTP web request using the URL:
-            // Uri uri = new Uri("http://10.21.0.137/20131011110061/api/restaurante");
-            Uri uri = new Uri("http://localhost:3906/api/restaurante");
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
-
-            request.Method = "GET";
-
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
-                {
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-
-                    // Return the JSON document:
-                    return jsonDoc.ToString();
-                }
-            }
-        }
+        
 
         private string Get2()
         {
