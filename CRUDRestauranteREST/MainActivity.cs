@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Json;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text;
 
 namespace CRUDRestauranteREST
 {
@@ -45,12 +46,67 @@ namespace CRUDRestauranteREST
             }
         }
 
-        private async void Post()
-        {
-            WebClient client = new WebClient();
-            Uri uri = new Uri("http://10.21.0.137/20131011110061/api/restaurante");
-            
 
+        /*private void btnPost_Click(object sender, RoutedEventArgs e)
+        {
+            TestePost();
+        }
+
+        private void btnGet_Click(object sender, RoutedEventArgs e)
+        {
+            TesteGet();
+        }*/
+
+        public void TestePost()
+        {
+            Models.Restaurante x = new Models.Restaurante
+            {
+                Id = 1000,
+                Descricao = "Teste"
+            };
+            string r = "=" + JsonConvert.SerializeObject(x);
+            Post(r);
+        }
+
+        private void Post(string r)
+        {
+            // Create a request using a URL that can receive a post. 
+            //WebRequest request = WebRequest.Create("http://10.21.0.137/20131011110061/api/restaurante");
+            WebRequest request = WebRequest.Create("http://localhost:3906/api/restaurante");
+
+            // Set the Method property of the request to POST.
+            request.Method = "POST";
+
+            // Create POST data and convert it to a byte array.
+            string postData = r;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+
+            // Set the ContentType property of the WebRequest.
+            request.ContentType = "application/x-www-form-urlencoded";
+            // Set the ContentLength property of the WebRequest.
+            request.ContentLength = byteArray.Length;
+            // Get the request stream.
+            Stream dataStream = request.GetRequestStream();
+            // Write the data to the request stream.
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.
+            dataStream.Close();
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            // Display the status.
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            // Get the stream containing content returned by the server.
+            dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            Console.WriteLine(responseFromServer);
+            // Clean up the streams.
+            reader.Close();
+            dataStream.Close();
+            response.Close();
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -83,6 +139,67 @@ namespace CRUDRestauranteREST
             int layout = Resource.Layout.ListItem;
             SimpleAdapter adapter = new SimpleAdapter(this, dados, layout, from, to);
             this.ListAdapter = adapter;
+        }
+
+
+        public void TesteGet()
+        {
+            // JsonValue aeho = await Get();
+            string aeho = Get2();
+            List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
+            dataGrid.ItemsSource = list;
+        }
+
+        private async Task<string> Get()
+        {
+            // Create an HTTP web request using the URL:
+            // Uri uri = new Uri("http://10.21.0.137/20131011110061/api/restaurante");
+            Uri uri = new Uri("http://localhost:3906/api/restaurante");
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+
+            request.Method = "GET";
+
+            // Send the request to the server and wait for the response:
+            using (WebResponse response = await request.GetResponseAsync())
+            {
+                // Get a stream representation of the HTTP web response:
+                using (Stream stream = response.GetResponseStream())
+                {
+                    // Use this stream to build a JSON document object:
+                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+
+                    // Return the JSON document:
+                    return jsonDoc.ToString();
+                }
+            }
+        }
+
+        private string Get2()
+        {
+            // Create a request for the URL. 
+            WebRequest request = WebRequest.Create("http://localhost:3906/api/restaurante");
+
+            // If required by the server, set the credentials.
+            // request.Credentials = CredentialCache.DefaultCredentials;
+
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            // Display the status.
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            // Get the stream containing content returned by the server.
+            Stream dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            Console.WriteLine(responseFromServer);
+            // Clean up the streams and the response.
+            reader.Close();
+            response.Close();
+
+            return responseFromServer;
         }
     }
 }
