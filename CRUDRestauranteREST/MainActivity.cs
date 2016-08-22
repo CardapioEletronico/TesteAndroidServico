@@ -23,6 +23,28 @@ namespace CRUDRestauranteREST
     {
         private JsonValue aeho;
 
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            SetContentView(Resource.Layout.Main);
+            LoadContent();
+
+            //Button button = FindViewById<Button>(Resource.Id.btnSelect);
+            //button.Click += delegate { Teste(); };
+
+
+            //Atualizar conteúdo
+            Button btnGet = FindViewById<Button>(Resource.Id.btnGet);
+            btnGet.Click += delegate { LoadContent(); };
+            //Adicionar restaurante
+            Button btnPost = FindViewById<Button>(Resource.Id.btnPost);
+            btnPost.Click += delegate { Postar(); };
+            //Update de conteúdo
+            Button btnPut = FindViewById<Button>(Resource.Id.btnPut);
+            btnPut.Click += delegate { Put(); };
+
+        }
+        //MÉTODO GET HHTPWEBREQUEST
         private async Task<JsonValue> Get()
         {
             // Create an HTTP web request using the URL:
@@ -44,59 +66,104 @@ namespace CRUDRestauranteREST
                 }
             }
         }
-
-        /*private async Task<string> Get()
+        //MÉTODO GET WEBREQUEST
+        private string Get2()
         {
-            // Create an HTTP web request using the URL:
-            // Uri uri = new Uri("http://10.21.0.137/20131011110061/api/restaurante");
-            Uri uri = new Uri("http://localhost:3906/api/restaurante");
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+            // Create a request for the URL. 
+            WebRequest request = WebRequest.Create("http://10.21.0.137/20131011110061/api/restaurante");
 
-            request.Method = "GET";
+            // If required by the server, set the credentials.
+            // request.Credentials = CredentialCache.DefaultCredentials;
 
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
-                {
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                    Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            // Display the status.
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            // Get the stream containing content returned by the server.
+            Stream dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            Console.WriteLine(responseFromServer);
+            // Clean up the streams and the response.
+            reader.Close();
+            response.Close();
 
-                    // Return the JSON document:
-                    return jsonDoc.ToString();
-                }
-            }
-        }*/
-
-
-        /*private void btnPost_Click(object sender, RoutedEventArgs e)
-        {
-            TestePost();
+            return responseFromServer;
         }
 
-        private void btnGet_Click(object sender, RoutedEventArgs e)
+        private void Put()
         {
-            TesteGet();
-        }*/
-
-        public void TestePost()
-        {
+            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
+            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
             Models.Restaurante x = new Models.Restaurante
             {
-                Id = 1000,
-                Descricao = "Teste"
+                Id = 1,
+                Descricao = "Alo",
             };
-            string r = "=" + JsonConvert.SerializeObject(x);
-            Post(r);
+
+            var request = (HttpWebRequest)WebRequest.Create(postUrl);
+            request.Method = "PUT";
+            request.ContentType = "application/xml";
+            if (x != null)
+            {
+                request.ContentLength = Size(x);
+                Stream dataStream = request.GetRequestStream();
+                Serialize(dataStream, x);
+                dataStream.Close();
+            }
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string returnString = response.StatusCode.ToString();
         }
 
+        public void Serialize(Stream output, object input)
+        {
+            var ser = new DataContractSerializer(input.GetType());
+            ser.WriteObject(output, input);
+        }
+    
+
+        /*var bytes = Encoding.ASCII.GetBytes(r);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("http://10.21.0.137/20131011110061/api/restaurante"));
+        request.Method = "PUT";
+        request.ContentType = "application/x-www-form-urlencoded";
+        using (var requestStream = request.GetRequestStream())
+        {
+            requestStream.Write(bytes, 0, bytes.Length);
+        }
+        var response = (HttpWebResponse)request.GetResponse();*/
+
+        /*using (var client = new System.Net.WebClient())
+        {
+            client.UploadData("http://10.21.0.137/20131011110061/api/restaurante", "PUT", r);
+        }
+        response = await client.PutAsync(uri, content);*/
+    }
+
+        public void Update()
+        {
+            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
+            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
+            Models.Restaurante x = new Models.Restaurante
+            {
+                Id = int.Parse(txtId.Text),
+                Descricao = txtDesc.Text,
+            };
+            string r = "=" + JsonConvert.SerializeObject(x);
+            string postData = r;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            Put();
+        }
+
+        //MÉTODO POST
         private void Post(string r)
         {
             // Create a request using a URL that can receive a post. 
             //WebRequest request = WebRequest.Create("http://10.21.0.137/20131011110061/api/restaurante");
-            WebRequest request = WebRequest.Create("http://localhost:3906/api/restaurante");
+            WebRequest request = WebRequest.Create("http://10.21.0.137/20131011110061/api/restaurante");
 
             // Set the Method property of the request to POST.
             request.Method = "POST";
@@ -133,18 +200,8 @@ namespace CRUDRestauranteREST
             response.Close();
         }
 
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            Teste();
-            SetContentView(Resource.Layout.Main);
-
-            //Button button = FindViewById<Button>(Resource.Id.btnSelect);
-            //button.Click += delegate { Teste(); };
-            
-        }
-
-        public async void Teste()
+        //LOAD LISTA E PÁGINA
+        public async void LoadContent()
         {
             aeho = await Get();
 
@@ -159,28 +216,32 @@ namespace CRUDRestauranteREST
             }
 
             string[] from = new String[] { "Id", "Descricao" };
-            int[] to = new int[] {Resource.Id.idRest, Resource.Id.descRest };
-            //int layout = Resource.Layout.ListItem;
-            int layout = Resource.Layout.Main;
-            //SimpleAdapter adapter = new SimpleAdapter(this, dados, layout, from, to);
-            //this.ListAdapter = adapter;
+            int[] to = new int[] { Resource.Id.idRest, Resource.Id.descRest };
+            int layout = Resource.Layout.ListItem;
 
-            //ListView lv = FindViewById<ListView>(Resource.Id.lista);
-            //lv.Adapter = adapter;
-
-            
             EditText txtid = FindViewById<EditText>(Resource.Id.txtId);
             EditText txtdesc = FindViewById<EditText>(Resource.Id.txtDescricao);
             // ArrayList for data row
             // SimpleAdapter mapping static data to views in xml file
-            SimpleAdapter adapter = new SimpleAdapter(this, dados, Resource.Layout.ListItem, from, to);
+            SimpleAdapter adapter = new SimpleAdapter(this, dados, layout, from, to);
 
-            //this.ListAdapter = adapter;
             ListView.Adapter = adapter;
-
-
-            //http://www.worldbestlearningcenter.com/tips/Android-ListView-SimpleAdapter.htm
         }
+
+        public void Postar()
+        {
+            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
+            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
+            Models.Restaurante x = new Models.Restaurante
+            {
+                Id = int.Parse(txtId.Text),
+                Descricao = txtDesc.Text,
+            };
+            string r = "=" + JsonConvert.SerializeObject(x);
+            Post(r);
+        }
+
+        
 
         public void TesteGet()
         {
@@ -188,37 +249,7 @@ namespace CRUDRestauranteREST
             List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
             //dataGrid.ItemsSource = list;
         }
-
-        
-
-        private string Get2()
-        {
-            // Create a request for the URL. 
-            WebRequest request = WebRequest.Create("http://localhost:3906/api/restaurante");
-
-            // If required by the server, set the credentials.
-            // request.Credentials = CredentialCache.DefaultCredentials;
-
-            // Get the response.
-            WebResponse response = request.GetResponse();
-            // Display the status.
-            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-            // Get the stream containing content returned by the server.
-            Stream dataStream = response.GetResponseStream();
-            // Open the stream using a StreamReader for easy access.
-            StreamReader reader = new StreamReader(dataStream);
-            // Read the content.
-            string responseFromServer = reader.ReadToEnd();
-            // Display the content.
-            Console.WriteLine(responseFromServer);
-            // Clean up the streams and the response.
-            reader.Close();
-            response.Close();
-
-            return responseFromServer;
-        }
     }
 }
 
-//http://stacktips.com/tutorials/xamarin/listview-example-in-xamarin-android
 

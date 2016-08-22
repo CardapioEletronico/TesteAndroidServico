@@ -21,12 +21,38 @@
             android:hint="Digite a descricao"
             android:layout_weight="1.5" />
         <Button
-            android:id="@+id/btadd"
+            android:id="@+id/btnPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="Adicionar"
             android:layout_weight="0.5"
-            android:onClick="addRow" />
+            android:onClick="Postar" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnGet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carregar"
+            android:layout_weight="0.5"
+            android:onClick="Atualizar" />
+        <Button
+            android:id="@+id/btnPut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Updar"
+            android:layout_weight="0.5"
+            android:onClick="Update" />
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deletar"
+            android:layout_weight="0.5"
+            android:onClick="Deletar" />
     </LinearLayout>
     <ListView
         android:id="@android:id/list"

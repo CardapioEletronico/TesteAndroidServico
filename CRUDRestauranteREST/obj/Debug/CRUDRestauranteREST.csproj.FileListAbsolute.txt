@@ -137,4 +137,51 @@ C:\Users\Isaac Medeiros\Desktop\TesteAndroidServico\CRUDRestauranteREST\obj\Debu
 C:\Users\Isaac Medeiros\Desktop\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.Xml.dll.mdb
 C:\Users\Isaac Medeiros\Desktop\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.Xml.Linq.dll.mdb
 C:\Users\Isaac Medeiros\Desktop\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\CRUDRestauranteREST.dll.mdb
-C:\Users\Isaac Medeiros\Desktop\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\CRUDRestauranteREST.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\CRUDRestauranteREST.dll
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\CRUDRestauranteREST.pdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\CRUDRestauranteREST.CRUDRestauranteREST.apk
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\CRUDRestauranteREST.CRUDRestauranteREST-Signed.apk
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\CRUDRestauranteREST.csprojResolveAssemblyReference.cache
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\CRUDRestauranteREST.dll
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\CRUDRestauranteREST.pdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\bin\CRUDRestauranteREST.CRUDRestauranteREST.apk
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\res\layout\listitem.xml
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\res\layout\main.xml
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\res\values\strings.xml
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\res\drawable\icon.png
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\R.cs.flag
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\uploadflags.txt
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\CRUDRestauranteREST.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\Java.Interop.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\Microsoft.CSharp.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\Mono.Android.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\Mono.CSharp.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\mscorlib.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.ComponentModel.Composition.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.Core.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.Json.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.Net.Http.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.Runtime.Serialization.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.ServiceModel.Internals.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.Xml.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\System.Xml.Linq.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\CRUDRestauranteREST.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\Java.Interop.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\Microsoft.CSharp.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\Mono.Android.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\Mono.CSharp.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\mscorlib.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.ComponentModel.Composition.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.Core.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.Json.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.Net.Http.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.Runtime.Serialization.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.ServiceModel.Internals.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.Xml.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\android\assets\System.Xml.Linq.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\obj\Debug\CRUDRestauranteREST.dll.mdb
+C:\Users\Isaac Medeiros\Desktop\Projeto Cardápio - Arquivos\TesteAndroidServico\CRUDRestauranteREST\bin\Debug\CRUDRestauranteREST.dll.mdb
