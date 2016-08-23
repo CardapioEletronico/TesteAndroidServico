@@ -41,7 +41,10 @@ namespace CRUDRestauranteREST
             btnPost.Click += delegate { Postar(); };
             //Update de conteúdo
             Button btnPut = FindViewById<Button>(Resource.Id.btnPut);
-            btnPut.Click += delegate { Put(); };
+            btnPut.Click += delegate { };
+
+            Button btnDelete = FindViewById<Button>(Resource.Id.btnDelete);
+            btnDelete.Click += delegate { Delete(); };
 
         }
         //MÉTODO GET HHTPWEBREQUEST
@@ -67,6 +70,7 @@ namespace CRUDRestauranteREST
             }
         }
         //MÉTODO GET WEBREQUEST
+
         private string Get2()
         {
             // Create a request for the URL. 
@@ -92,70 +96,6 @@ namespace CRUDRestauranteREST
             response.Close();
 
             return responseFromServer;
-        }
-
-        private void Put()
-        {
-            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
-            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
-            Models.Restaurante x = new Models.Restaurante
-            {
-                Id = 1,
-                Descricao = "Alo",
-            };
-
-            var request = (HttpWebRequest)WebRequest.Create(postUrl);
-            request.Method = "PUT";
-            request.ContentType = "application/xml";
-            if (x != null)
-            {
-                request.ContentLength = Size(x);
-                Stream dataStream = request.GetRequestStream();
-                Serialize(dataStream, x);
-                dataStream.Close();
-            }
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            string returnString = response.StatusCode.ToString();
-        }
-
-        public void Serialize(Stream output, object input)
-        {
-            var ser = new DataContractSerializer(input.GetType());
-            ser.WriteObject(output, input);
-        }
-    
-
-        /*var bytes = Encoding.ASCII.GetBytes(r);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("http://10.21.0.137/20131011110061/api/restaurante"));
-        request.Method = "PUT";
-        request.ContentType = "application/x-www-form-urlencoded";
-        using (var requestStream = request.GetRequestStream())
-        {
-            requestStream.Write(bytes, 0, bytes.Length);
-        }
-        var response = (HttpWebResponse)request.GetResponse();*/
-
-        /*using (var client = new System.Net.WebClient())
-        {
-            client.UploadData("http://10.21.0.137/20131011110061/api/restaurante", "PUT", r);
-        }
-        response = await client.PutAsync(uri, content);*/
-    }
-
-        public void Update()
-        {
-            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
-            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
-            Models.Restaurante x = new Models.Restaurante
-            {
-                Id = int.Parse(txtId.Text),
-                Descricao = txtDesc.Text,
-            };
-            string r = "=" + JsonConvert.SerializeObject(x);
-            string postData = r;
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            Put();
         }
 
         //MÉTODO POST
@@ -199,6 +139,91 @@ namespace CRUDRestauranteREST
             dataStream.Close();
             response.Close();
         }
+
+        //MÉTODO DELETE WEBREQUEST
+        private async void Delete()
+        {
+            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://10.21.0.137/20131011110061/");
+
+                var id = txtId.Text;
+                var cliente = await client.DeleteAsync(string.Format("api/restaurante/" + id));
+            }
+        }
+
+        public void Deletar()
+        {
+            Delete();
+        }
+
+        /*private void Put() 
+        {
+            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
+            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
+            Models.Restaurante x = new Models.Restaurante
+            {
+                Id = 1,
+                Descricao = "Alo",
+            };
+
+            var request = (HttpWebRequest)WebRequest.Create(postUrl);
+            request.Method = "PUT";
+            request.ContentType = "application/xml";
+            if (x != null)
+            {
+                request.ContentLength = Size(x);
+                Stream dataStream = request.GetRequestStream();
+                Serialize(dataStream, x);
+                dataStream.Close();
+            }
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string returnString = response.StatusCode.ToString();
+        }
+
+        public void Serialize(Stream output, object input)
+        {
+            var ser = new DataContractSerializer(input.GetType());
+            ser.WriteObject(output, input);
+        }*/
+
+
+
+        /*var bytes = Encoding.ASCII.GetBytes(r);
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("http://10.21.0.137/20131011110061/api/restaurante"));
+        request.Method = "PUT";
+        request.ContentType = "application/x-www-form-urlencoded";
+        using (var requestStream = request.GetRequestStream())
+        {
+            requestStream.Write(bytes, 0, bytes.Length);
+        }
+        var response = (HttpWebResponse)request.GetResponse();*/
+
+        /*using (var client = new System.Net.WebClient())
+        {
+            client.UploadData("http://10.21.0.137/20131011110061/api/restaurante", "PUT", r);
+        }
+        response = await client.PutAsync(uri, content);*/
+
+
+        public void Update() 
+        {
+            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
+            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
+            Models.Restaurante x = new Models.Restaurante
+            {
+                Id = int.Parse(txtId.Text),
+                Descricao = txtDesc.Text,
+            };
+            string r = "=" + JsonConvert.SerializeObject(x);
+            string postData = r;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            //Put();
+        }
+
+        
 
         //LOAD LISTA E PÁGINA
         public async void LoadContent()
