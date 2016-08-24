@@ -23,6 +23,7 @@ public final class R {
         public static final int btnPut=0x7f060006;
         public static final int descRest=0x7f060001;
         public static final int idRest=0x7f060000;
+        public static final int scrollView1=0x7f060008;
         public static final int txtDescricao=0x7f060003;
         public static final int txtId=0x7f060002;
     }

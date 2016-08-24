@@ -58,4 +58,11 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView1"
+        android:layout_marginBottom="442.5dp" />
 </LinearLayout>

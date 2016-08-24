@@ -94,6 +94,9 @@ namespace CRUDRestauranteREST
 			// aapt resource value: 0x7f060000
 			public const int idRest = 2131099648;
 			
+			// aapt resource value: 0x7f060008
+			public const int scrollView1 = 2131099656;
+			
 			// aapt resource value: 0x7f060003
 			public const int txtDescricao = 2131099651;
 			

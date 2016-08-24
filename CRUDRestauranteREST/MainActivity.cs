@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace CRUDRestauranteREST
 {
     [Activity(Label = "CRUDRestauranteREST", MainLauncher = true, Icon = "@drawable/icon")]
@@ -28,11 +29,7 @@ namespace CRUDRestauranteREST
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             LoadContent();
-
-            //Button button = FindViewById<Button>(Resource.Id.btnSelect);
-            //button.Click += delegate { Teste(); };
-
-
+            
             //Atualizar conteúdo
             Button btnGet = FindViewById<Button>(Resource.Id.btnGet);
             btnGet.Click += delegate { LoadContent(); };
@@ -41,7 +38,7 @@ namespace CRUDRestauranteREST
             btnPost.Click += delegate { Postar(); };
             //Update de conteúdo
             Button btnPut = FindViewById<Button>(Resource.Id.btnPut);
-            btnPut.Click += delegate { };
+            btnPut.Click += delegate { Put(); };
 
             Button btnDelete = FindViewById<Button>(Resource.Id.btnDelete);
             btnDelete.Click += delegate { Delete(); };
@@ -96,6 +93,47 @@ namespace CRUDRestauranteREST
             response.Close();
 
             return responseFromServer;
+        }
+
+        //LOAD LISTA E PÁGINA
+        public async void LoadContent()
+        {
+            aeho = await Get();
+
+            List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
+            IList<IDictionary<string, object>> dados = new List<IDictionary<string, object>>();
+            foreach (Models.Restaurante r in list)
+            {
+                IDictionary<string, object> dado = new JavaDictionary<string, object>();
+                dado.Add("Id", r.Id.ToString());
+                dado.Add("Descricao", r.Descricao);
+                dados.Add(dado);
+            }
+
+            string[] from = new String[] { "Id", "Descricao" };
+            int[] to = new int[] { Resource.Id.idRest, Resource.Id.descRest };
+            int layout = Resource.Layout.ListItem;
+
+            EditText txtid = FindViewById<EditText>(Resource.Id.txtId);
+            EditText txtdesc = FindViewById<EditText>(Resource.Id.txtDescricao);
+            // ArrayList for data row
+            // SimpleAdapter mapping static data to views in xml file
+            SimpleAdapter adapter = new SimpleAdapter(this, dados, layout, from, to);
+
+            ListView.Adapter = adapter;
+        }
+
+        public void Postar()
+        {
+            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
+            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
+            Models.Restaurante x = new Models.Restaurante
+            {
+                Id = int.Parse(txtId.Text),
+                Descricao = txtDesc.Text,
+            };
+            string r = "=" + JsonConvert.SerializeObject(x);
+            Post(r);
         }
 
         //MÉTODO POST
@@ -158,58 +196,9 @@ namespace CRUDRestauranteREST
             Delete();
         }
 
-        /*private void Put() 
-        {
-            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
-            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
-            Models.Restaurante x = new Models.Restaurante
-            {
-                Id = 1,
-                Descricao = "Alo",
-            };
-
-            var request = (HttpWebRequest)WebRequest.Create(postUrl);
-            request.Method = "PUT";
-            request.ContentType = "application/xml";
-            if (x != null)
-            {
-                request.ContentLength = Size(x);
-                Stream dataStream = request.GetRequestStream();
-                Serialize(dataStream, x);
-                dataStream.Close();
-            }
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            string returnString = response.StatusCode.ToString();
-        }
-
-        public void Serialize(Stream output, object input)
-        {
-            var ser = new DataContractSerializer(input.GetType());
-            ser.WriteObject(output, input);
-        }*/
-
-
-
-        /*var bytes = Encoding.ASCII.GetBytes(r);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("http://10.21.0.137/20131011110061/api/restaurante"));
-        request.Method = "PUT";
-        request.ContentType = "application/x-www-form-urlencoded";
-        using (var requestStream = request.GetRequestStream())
-        {
-            requestStream.Write(bytes, 0, bytes.Length);
-        }
-        var response = (HttpWebResponse)request.GetResponse();*/
-
-        /*using (var client = new System.Net.WebClient())
-        {
-            client.UploadData("http://10.21.0.137/20131011110061/api/restaurante", "PUT", r);
-        }
-        response = await client.PutAsync(uri, content);*/
-
-
-        public void Update() 
-        {
+        private async void Put() {
+            
+            //Tentativa 2
             EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
             EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
             Models.Restaurante x = new Models.Restaurante
@@ -217,62 +206,16 @@ namespace CRUDRestauranteREST
                 Id = int.Parse(txtId.Text),
                 Descricao = txtDesc.Text,
             };
-            string r = "=" + JsonConvert.SerializeObject(x);
-            string postData = r;
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            //Put();
-        }
+            string t = "=" + JsonConvert.SerializeObject(x);
+            var httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("http://10.21.0.137");
+            var content = new StringContent(t, Encoding.UTF8, "application/x-www-form-urlencoded"); 
+            //var result = httpClient.PutAsync("api/restaurante/", content).Result;
+            await httpClient.PutAsync("/20131011110061/api/restaurante/"+x.Id, content);
 
-        
 
-        //LOAD LISTA E PÁGINA
-        public async void LoadContent()
-        {
-            aeho = await Get();
+        Console.Write("OI");
 
-            List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
-            IList<IDictionary<string, object>> dados = new List<IDictionary<string, object>>();
-            foreach (Models.Restaurante r in list)
-            {
-                IDictionary<string, object> dado = new JavaDictionary<string, object>();
-                dado.Add("Id", r.Id.ToString());
-                dado.Add("Descricao", r.Descricao);
-                dados.Add(dado);
-            }
-
-            string[] from = new String[] { "Id", "Descricao" };
-            int[] to = new int[] { Resource.Id.idRest, Resource.Id.descRest };
-            int layout = Resource.Layout.ListItem;
-
-            EditText txtid = FindViewById<EditText>(Resource.Id.txtId);
-            EditText txtdesc = FindViewById<EditText>(Resource.Id.txtDescricao);
-            // ArrayList for data row
-            // SimpleAdapter mapping static data to views in xml file
-            SimpleAdapter adapter = new SimpleAdapter(this, dados, layout, from, to);
-
-            ListView.Adapter = adapter;
-        }
-
-        public void Postar()
-        {
-            EditText txtId = FindViewById<EditText>(Resource.Id.txtId);
-            EditText txtDesc = FindViewById<EditText>(Resource.Id.txtDescricao);
-            Models.Restaurante x = new Models.Restaurante
-            {
-                Id = int.Parse(txtId.Text),
-                Descricao = txtDesc.Text,
-            };
-            string r = "=" + JsonConvert.SerializeObject(x);
-            Post(r);
-        }
-
-        
-
-        public void TesteGet()
-        {
-            string aeho = Get2();
-            List<Models.Restaurante> list = JsonConvert.DeserializeObject<List<Models.Restaurante>>(aeho);
-            //dataGrid.ItemsSource = list;
         }
     }
 }
